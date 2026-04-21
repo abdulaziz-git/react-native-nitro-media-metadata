@@ -5,7 +5,7 @@ A high-performance React Native library for extracting comprehensive video metad
 ## Features
 
 - 🎥 **Extract comprehensive video metadata** including duration, dimensions, codec, bitrate, and more
-- 🎵 **Audio metadata extraction** including duration, sample rate, channels, artist, and title
+- 🎵 **Audio metadata extraction** including duration, sample rate, channels, artist, title, album, year, genre, track number, and embedded artwork
 - 🖼️ **Image metadata extraction** including dimensions, format, EXIF data, and orientation
 - 🌐 **Cross-platform support** for iOS and Android
 - ⚡ **High performance** using native modules via Nitro Modules
@@ -157,17 +157,21 @@ Returns a promise that resolves to a `VideoInfoResult` object with the following
 
 Returns a promise that resolves to an `AudioInfoResult` object:
 
-| Property     | Type     | Description                             | Platform Support |
-| ------------ | -------- | --------------------------------------- | ---------------- |
-| `duration`   | `number` | Duration in seconds (float)             | All              |
-| `fileSize`   | `number` | File size in bytes                      | All              |
-| `codec`      | `string` | Audio codec (aac, mp3, etc.)            | All              |
-| `sampleRate` | `number` | Audio sample rate (samples per second)  | All              |
-| `channels`   | `number` | Audio channel count                     | All              |
-| `bitRate`    | `number` | Bit rate in bits per second             | All              |
-| `artist`     | `string` | Artist name                             | All              |
-| `title`      | `string` | Title                                   | All              |
-| `album`      | `string` | Album name                              | All              |
+| Property      | Type     | Description                             | Platform Support |
+| ------------- | -------- | --------------------------------------- | ---------------- |
+| `duration`    | `number` | Duration in seconds (float)             | All              |
+| `fileSize`    | `number` | File size in bytes                      | All              |
+| `codec`       | `string` | Audio codec (aac, mp3, flac, etc.)      | All              |
+| `sampleRate`  | `number` | Audio sample rate (samples per second)  | All              |
+| `channels`    | `number` | Audio channel count                     | All              |
+| `bitRate`     | `number` | Bit rate in bits per second             | All              |
+| `artist`      | `string` | Artist name                             | All              |
+| `title`       | `string` | Title                                   | All              |
+| `album`       | `string` | Album name                              | All              |
+| `year`        | `string` | Release year                            | All              |
+| `trackNumber` | `string` | Track number                            | All              |
+| `genre`       | `string` | Genre                                   | All              |
+| `artwork`     | `string` | Embedded artwork as base64 string       | All              |
 
 ### `getImageInfoAsync(source: string, options: MediaInfoOptions): Promise<ImageInfoResult>`
 
