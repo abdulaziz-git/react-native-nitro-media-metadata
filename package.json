@@ -102,13 +102,6 @@
     "output": "lib",
     "targets": [
       [
-        "custom",
-        {
-          "script": "nitrogen",
-          "clean": "nitrogen/"
-        }
-      ],
-      [
         "module",
         {
           "esm": true
