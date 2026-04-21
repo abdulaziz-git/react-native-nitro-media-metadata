@@ -163,7 +163,11 @@ class NitroMediaMetadata: HybridNitroMediaMetadataSpec {
       bitRate: doubleValue(infoDict["bitRate"]),
       artist: infoDict["artist"] as? String,
       title: infoDict["title"] as? String,
-      album: infoDict["album"] as? String
+      album: infoDict["album"] as? String,
+      year: infoDict["year"] as? String,
+      trackNumber: infoDict["trackNumber"] as? String,
+      genre: infoDict["genre"] as? String,
+      artwork: infoDict["artwork"] as? String
     )
   }
 

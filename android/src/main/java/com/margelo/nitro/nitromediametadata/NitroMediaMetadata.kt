@@ -55,8 +55,6 @@ class NitroMediaMetadata: HybridNitroMediaMetadataSpec() {
             promise.resolve(result)
           }
         }
-
-
       } catch (e: Exception) {
         CoroutineScope(Dispatchers.Main).launch {
           promise.reject(e)
@@ -93,7 +91,11 @@ class NitroMediaMetadata: HybridNitroMediaMetadataSpec() {
             bitRate = (meta.bitRate ?: 0).toDouble(),
             artist = meta.artist,
             title = meta.title,
-            album = meta.album
+            album = meta.album,
+            year = meta.year,
+            trackNumber = meta.trackNumber,
+            genre = meta.genre,
+            artwork = meta.artwork
           )
 
           CoroutineScope(Dispatchers.Main).launch {

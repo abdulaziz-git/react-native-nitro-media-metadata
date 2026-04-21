@@ -49,10 +49,14 @@ namespace margelo::nitro::nitromediametadata {
     std::optional<std::string> artist     SWIFT_PRIVATE;
     std::optional<std::string> title     SWIFT_PRIVATE;
     std::optional<std::string> album     SWIFT_PRIVATE;
+    std::optional<std::string> year     SWIFT_PRIVATE;
+    std::optional<std::string> trackNumber     SWIFT_PRIVATE;
+    std::optional<std::string> genre     SWIFT_PRIVATE;
+    std::optional<std::string> artwork     SWIFT_PRIVATE;
 
   public:
     AudioInfoResult() = default;
-    explicit AudioInfoResult(double duration, double fileSize, std::string audioCodec, double sampleRate, double channels, double bitRate, std::optional<std::string> artist, std::optional<std::string> title, std::optional<std::string> album): duration(duration), fileSize(fileSize), audioCodec(audioCodec), sampleRate(sampleRate), channels(channels), bitRate(bitRate), artist(artist), title(title), album(album) {}
+    explicit AudioInfoResult(double duration, double fileSize, std::string audioCodec, double sampleRate, double channels, double bitRate, std::optional<std::string> artist, std::optional<std::string> title, std::optional<std::string> album, std::optional<std::string> year, std::optional<std::string> trackNumber, std::optional<std::string> genre, std::optional<std::string> artwork): duration(duration), fileSize(fileSize), audioCodec(audioCodec), sampleRate(sampleRate), channels(channels), bitRate(bitRate), artist(artist), title(title), album(album), year(year), trackNumber(trackNumber), genre(genre), artwork(artwork) {}
 
   public:
     friend bool operator==(const AudioInfoResult& lhs, const AudioInfoResult& rhs) = default;
@@ -76,7 +80,11 @@ namespace margelo::nitro {
         JSIConverter<double>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "bitRate"))),
         JSIConverter<std::optional<std::string>>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "artist"))),
         JSIConverter<std::optional<std::string>>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "title"))),
-        JSIConverter<std::optional<std::string>>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "album")))
+        JSIConverter<std::optional<std::string>>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "album"))),
+        JSIConverter<std::optional<std::string>>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "year"))),
+        JSIConverter<std::optional<std::string>>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "trackNumber"))),
+        JSIConverter<std::optional<std::string>>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "genre"))),
+        JSIConverter<std::optional<std::string>>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "artwork")))
       );
     }
     static inline jsi::Value toJSI(jsi::Runtime& runtime, const margelo::nitro::nitromediametadata::AudioInfoResult& arg) {
@@ -90,6 +98,10 @@ namespace margelo::nitro {
       obj.setProperty(runtime, PropNameIDCache::get(runtime, "artist"), JSIConverter<std::optional<std::string>>::toJSI(runtime, arg.artist));
       obj.setProperty(runtime, PropNameIDCache::get(runtime, "title"), JSIConverter<std::optional<std::string>>::toJSI(runtime, arg.title));
       obj.setProperty(runtime, PropNameIDCache::get(runtime, "album"), JSIConverter<std::optional<std::string>>::toJSI(runtime, arg.album));
+      obj.setProperty(runtime, PropNameIDCache::get(runtime, "year"), JSIConverter<std::optional<std::string>>::toJSI(runtime, arg.year));
+      obj.setProperty(runtime, PropNameIDCache::get(runtime, "trackNumber"), JSIConverter<std::optional<std::string>>::toJSI(runtime, arg.trackNumber));
+      obj.setProperty(runtime, PropNameIDCache::get(runtime, "genre"), JSIConverter<std::optional<std::string>>::toJSI(runtime, arg.genre));
+      obj.setProperty(runtime, PropNameIDCache::get(runtime, "artwork"), JSIConverter<std::optional<std::string>>::toJSI(runtime, arg.artwork));
       return obj;
     }
     static inline bool canConvert(jsi::Runtime& runtime, const jsi::Value& value) {
@@ -109,6 +121,10 @@ namespace margelo::nitro {
       if (!JSIConverter<std::optional<std::string>>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "artist")))) return false;
       if (!JSIConverter<std::optional<std::string>>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "title")))) return false;
       if (!JSIConverter<std::optional<std::string>>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "album")))) return false;
+      if (!JSIConverter<std::optional<std::string>>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "year")))) return false;
+      if (!JSIConverter<std::optional<std::string>>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "trackNumber")))) return false;
+      if (!JSIConverter<std::optional<std::string>>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "genre")))) return false;
+      if (!JSIConverter<std::optional<std::string>>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "artwork")))) return false;
       return true;
     }
   };

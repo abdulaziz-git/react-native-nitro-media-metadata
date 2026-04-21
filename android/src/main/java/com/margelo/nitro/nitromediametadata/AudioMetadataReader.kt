@@ -4,6 +4,7 @@ import android.content.Context
 import android.media.MediaExtractor
 import android.media.MediaFormat
 import android.media.MediaMetadataRetriever
+import android.util.Base64
 import android.webkit.URLUtil
 import androidx.core.net.toUri
 import java.io.File
@@ -19,7 +20,11 @@ data class AudioMetadata(
     val bitRate: Int?,
     val artist: String?,
     val title: String?,
-    val album: String?
+    val album: String?,
+    val year: String?,
+    val trackNumber: String?,
+    val genre: String?,
+    val artwork: String?
 )
 
 class AudioMetadataReader(private val context: Context) {
@@ -55,6 +60,11 @@ class AudioMetadataReader(private val context: Context) {
             val artist = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST)
             val title = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE)
             val album = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM)
+            val year = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_YEAR)
+            val trackNumber = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_CD_TRACK_NUMBER)
+            val genre = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_GENRE)
+            val artworkBytes = retriever.embeddedPicture
+            val artwork = artworkBytes?.let { Base64.encodeToString(it, Base64.NO_WRAP) }
 
             var channels: Int? = null
             var sampleRate: Int? = null
@@ -72,7 +82,8 @@ class AudioMetadataReader(private val context: Context) {
             }
 
             return AudioMetadata(
-                duration, fileSize, codec, sampleRate, channels, bitRate, artist, title, album
+                duration, fileSize, codec, sampleRate, channels, bitRate,
+                artist, title, album, year, trackNumber, genre, artwork
             )
         } catch (e: Exception) {
             return null

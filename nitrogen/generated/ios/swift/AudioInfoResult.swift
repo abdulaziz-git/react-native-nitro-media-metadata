@@ -18,7 +18,7 @@ public extension AudioInfoResult {
   /**
    * Create a new instance of `AudioInfoResult`.
    */
-  init(duration: Double, fileSize: Double, audioCodec: String, sampleRate: Double, channels: Double, bitRate: Double, artist: String?, title: String?, album: String?) {
+  init(duration: Double, fileSize: Double, audioCodec: String, sampleRate: Double, channels: Double, bitRate: Double, artist: String?, title: String?, album: String?, year: String?, trackNumber: String?, genre: String?, artwork: String?) {
     self.init(duration, fileSize, std.string(audioCodec), sampleRate, channels, bitRate, { () -> bridge.std__optional_std__string_ in
       if let __unwrappedValue = artist {
         return bridge.create_std__optional_std__string_(std.string(__unwrappedValue))
@@ -33,6 +33,30 @@ public extension AudioInfoResult {
       }
     }(), { () -> bridge.std__optional_std__string_ in
       if let __unwrappedValue = album {
+        return bridge.create_std__optional_std__string_(std.string(__unwrappedValue))
+      } else {
+        return .init()
+      }
+    }(), { () -> bridge.std__optional_std__string_ in
+      if let __unwrappedValue = year {
+        return bridge.create_std__optional_std__string_(std.string(__unwrappedValue))
+      } else {
+        return .init()
+      }
+    }(), { () -> bridge.std__optional_std__string_ in
+      if let __unwrappedValue = trackNumber {
+        return bridge.create_std__optional_std__string_(std.string(__unwrappedValue))
+      } else {
+        return .init()
+      }
+    }(), { () -> bridge.std__optional_std__string_ in
+      if let __unwrappedValue = genre {
+        return bridge.create_std__optional_std__string_(std.string(__unwrappedValue))
+      } else {
+        return .init()
+      }
+    }(), { () -> bridge.std__optional_std__string_ in
+      if let __unwrappedValue = artwork {
         return bridge.create_std__optional_std__string_(std.string(__unwrappedValue))
       } else {
         return .init()
@@ -99,6 +123,54 @@ public extension AudioInfoResult {
     return { () -> String? in
       if bridge.has_value_std__optional_std__string_(self.__album) {
         let __unwrapped = bridge.get_std__optional_std__string_(self.__album)
+        return String(__unwrapped)
+      } else {
+        return nil
+      }
+    }()
+  }
+  
+  @inline(__always)
+  var year: String? {
+    return { () -> String? in
+      if bridge.has_value_std__optional_std__string_(self.__year) {
+        let __unwrapped = bridge.get_std__optional_std__string_(self.__year)
+        return String(__unwrapped)
+      } else {
+        return nil
+      }
+    }()
+  }
+  
+  @inline(__always)
+  var trackNumber: String? {
+    return { () -> String? in
+      if bridge.has_value_std__optional_std__string_(self.__trackNumber) {
+        let __unwrapped = bridge.get_std__optional_std__string_(self.__trackNumber)
+        return String(__unwrapped)
+      } else {
+        return nil
+      }
+    }()
+  }
+  
+  @inline(__always)
+  var genre: String? {
+    return { () -> String? in
+      if bridge.has_value_std__optional_std__string_(self.__genre) {
+        let __unwrapped = bridge.get_std__optional_std__string_(self.__genre)
+        return String(__unwrapped)
+      } else {
+        return nil
+      }
+    }()
+  }
+  
+  @inline(__always)
+  var artwork: String? {
+    return { () -> String? in
+      if bridge.has_value_std__optional_std__string_(self.__artwork) {
+        let __unwrapped = bridge.get_std__optional_std__string_(self.__artwork)
         return String(__unwrapped)
       } else {
         return nil

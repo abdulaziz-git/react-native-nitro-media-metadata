@@ -50,6 +50,14 @@ namespace margelo::nitro::nitromediametadata {
       jni::local_ref<jni::JString> title = this->getFieldValue(fieldTitle);
       static const auto fieldAlbum = clazz->getField<jni::JString>("album");
       jni::local_ref<jni::JString> album = this->getFieldValue(fieldAlbum);
+      static const auto fieldYear = clazz->getField<jni::JString>("year");
+      jni::local_ref<jni::JString> year = this->getFieldValue(fieldYear);
+      static const auto fieldTrackNumber = clazz->getField<jni::JString>("trackNumber");
+      jni::local_ref<jni::JString> trackNumber = this->getFieldValue(fieldTrackNumber);
+      static const auto fieldGenre = clazz->getField<jni::JString>("genre");
+      jni::local_ref<jni::JString> genre = this->getFieldValue(fieldGenre);
+      static const auto fieldArtwork = clazz->getField<jni::JString>("artwork");
+      jni::local_ref<jni::JString> artwork = this->getFieldValue(fieldArtwork);
       return AudioInfoResult(
         duration,
         fileSize,
@@ -59,7 +67,11 @@ namespace margelo::nitro::nitromediametadata {
         bitRate,
         artist != nullptr ? std::make_optional(artist->toStdString()) : std::nullopt,
         title != nullptr ? std::make_optional(title->toStdString()) : std::nullopt,
-        album != nullptr ? std::make_optional(album->toStdString()) : std::nullopt
+        album != nullptr ? std::make_optional(album->toStdString()) : std::nullopt,
+        year != nullptr ? std::make_optional(year->toStdString()) : std::nullopt,
+        trackNumber != nullptr ? std::make_optional(trackNumber->toStdString()) : std::nullopt,
+        genre != nullptr ? std::make_optional(genre->toStdString()) : std::nullopt,
+        artwork != nullptr ? std::make_optional(artwork->toStdString()) : std::nullopt
       );
     }
 
@@ -69,7 +81,7 @@ namespace margelo::nitro::nitromediametadata {
      */
     [[maybe_unused]]
     static jni::local_ref<JAudioInfoResult::javaobject> fromCpp(const AudioInfoResult& value) {
-      using JSignature = JAudioInfoResult(double, double, jni::alias_ref<jni::JString>, double, double, double, jni::alias_ref<jni::JString>, jni::alias_ref<jni::JString>, jni::alias_ref<jni::JString>);
+      using JSignature = JAudioInfoResult(double, double, jni::alias_ref<jni::JString>, double, double, double, jni::alias_ref<jni::JString>, jni::alias_ref<jni::JString>, jni::alias_ref<jni::JString>, jni::alias_ref<jni::JString>, jni::alias_ref<jni::JString>, jni::alias_ref<jni::JString>, jni::alias_ref<jni::JString>);
       static const auto clazz = javaClassStatic();
       static const auto create = clazz->getStaticMethod<JSignature>("fromCpp");
       return create(
@@ -82,7 +94,11 @@ namespace margelo::nitro::nitromediametadata {
         value.bitRate,
         value.artist.has_value() ? jni::make_jstring(value.artist.value()) : nullptr,
         value.title.has_value() ? jni::make_jstring(value.title.value()) : nullptr,
-        value.album.has_value() ? jni::make_jstring(value.album.value()) : nullptr
+        value.album.has_value() ? jni::make_jstring(value.album.value()) : nullptr,
+        value.year.has_value() ? jni::make_jstring(value.year.value()) : nullptr,
+        value.trackNumber.has_value() ? jni::make_jstring(value.trackNumber.value()) : nullptr,
+        value.genre.has_value() ? jni::make_jstring(value.genre.value()) : nullptr,
+        value.artwork.has_value() ? jni::make_jstring(value.artwork.value()) : nullptr
       );
     }
   };

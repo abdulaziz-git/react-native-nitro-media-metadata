@@ -43,7 +43,19 @@ data class AudioInfoResult(
   val title: String?,
   @DoNotStrip
   @Keep
-  val album: String?
+  val album: String?,
+  @DoNotStrip
+  @Keep
+  val year: String?,
+  @DoNotStrip
+  @Keep
+  val trackNumber: String?,
+  @DoNotStrip
+  @Keep
+  val genre: String?,
+  @DoNotStrip
+  @Keep
+  val artwork: String?
 ) {
   /* primary constructor */
 
@@ -55,8 +67,8 @@ data class AudioInfoResult(
     @Keep
     @Suppress("unused")
     @JvmStatic
-    private fun fromCpp(duration: Double, fileSize: Double, audioCodec: String, sampleRate: Double, channels: Double, bitRate: Double, artist: String?, title: String?, album: String?): AudioInfoResult {
-      return AudioInfoResult(duration, fileSize, audioCodec, sampleRate, channels, bitRate, artist, title, album)
+    private fun fromCpp(duration: Double, fileSize: Double, audioCodec: String, sampleRate: Double, channels: Double, bitRate: Double, artist: String?, title: String?, album: String?, year: String?, trackNumber: String?, genre: String?, artwork: String?): AudioInfoResult {
+      return AudioInfoResult(duration, fileSize, audioCodec, sampleRate, channels, bitRate, artist, title, album, year, trackNumber, genre, artwork)
     }
   }
 }

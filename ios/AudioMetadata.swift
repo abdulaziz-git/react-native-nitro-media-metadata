@@ -44,6 +44,10 @@ public class AudioMetadata {
     var artist = ""
     var title = ""
     var album = ""
+    var year = ""
+    var trackNumber = ""
+    var genre = ""
+    var artwork = ""
 
     if let audioTrack = asset.tracks(withMediaType: .audio).first {
         bitrate = audioTrack.estimatedDataRate
@@ -58,18 +62,43 @@ public class AudioMetadata {
         }
     }
 
-    // Extract metadata (Artist, Title, Album)
     for item in asset.metadata {
-        guard let key = item.commonKey?.rawValue, let value = item.value else { continue }
-        switch key {
-        case AVMetadataKey.commonKeyArtist.rawValue:
-            artist = value as? String ?? ""
-        case AVMetadataKey.commonKeyTitle.rawValue:
-            title = value as? String ?? ""
-        case AVMetadataKey.commonKeyAlbumName.rawValue:
-            album = value as? String ?? ""
-        default:
-            break
+        guard let value = item.value else { continue }
+
+        if let key = item.commonKey?.rawValue {
+            switch key {
+            case AVMetadataKey.commonKeyArtist.rawValue:
+                artist = value as? String ?? ""
+            case AVMetadataKey.commonKeyTitle.rawValue:
+                title = value as? String ?? ""
+            case AVMetadataKey.commonKeyAlbumName.rawValue:
+                album = value as? String ?? ""
+            case AVMetadataKey.commonKeyArtwork.rawValue:
+                if let data = value as? Data {
+                    artwork = data.base64EncodedString()
+                }
+            default:
+                break
+            }
+        }
+
+        if let identifier = item.identifier {
+            switch identifier {
+            case AVMetadataIdentifier.id3MetadataYear,
+                 AVMetadataIdentifier.iTunesMetadataReleaseDate:
+                year = value as? String ?? ""
+            case AVMetadataIdentifier.id3MetadataTrackNumber:
+                if let str = value as? String {
+                    trackNumber = str
+                } else if let num = value as? NSNumber {
+                    trackNumber = num.stringValue
+                }
+            case AVMetadataIdentifier.id3MetadataContentType,
+                 AVMetadataIdentifier.iTunesMetadataUserGenre:
+                genre = value as? String ?? ""
+            default:
+                break
+            }
         }
     }
 
@@ -82,7 +111,11 @@ public class AudioMetadata {
       "bitRate": bitrate,
       "artist": artist,
       "title": title,
-      "album": album
+      "album": album,
+      "year": year,
+      "trackNumber": trackNumber,
+      "genre": genre,
+      "artwork": artwork
     ]
   }
 

@@ -128,6 +128,22 @@ export type AudioInfoResult = {
    * Album name (if available).
    */
   album?: string;
+  /**
+   * Release year (if available).
+   */
+  year?: string;
+  /**
+   * Track number (if available).
+   */
+  trackNumber?: string;
+  /**
+   * Genre (if available).
+   */
+  genre?: string;
+  /**
+   * Embedded artwork as base64-encoded string (if available).
+   */
+  artwork?: string;
 };
 
 export type ImageInfoResult = {
