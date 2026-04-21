@@ -1,4 +1,4 @@
-import type { HybridObject } from 'react-native-nitro-modules';
+import { type HybridObject } from 'react-native-nitro-modules';
 
 export type VideoLocationType = {
   latitude: number;
@@ -168,10 +168,11 @@ export type MediaInfoOptions = {
   headers?: Record<string, string>;
 };
 
-export interface NitroMediaMetadata extends HybridObject<{
-  ios: 'swift';
-  android: 'kotlin';
-}> {
+export interface NitroMediaMetadata
+  extends HybridObject<{
+    ios: 'swift';
+    android: 'kotlin';
+  }> {
   getVideoInfoAsync(
     source: string,
     options: MediaInfoOptions
