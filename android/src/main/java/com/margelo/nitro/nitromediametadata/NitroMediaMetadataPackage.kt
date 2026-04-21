@@ -16,7 +16,7 @@ class NitroMediaMetadataPackage : BaseReactPackage() {
 
     companion object {
         init {
-            NitroMediaMetadataOnLoad.initializeNative()
+            nitromediametadataOnLoad.initializeNative()
         }
     }
 }

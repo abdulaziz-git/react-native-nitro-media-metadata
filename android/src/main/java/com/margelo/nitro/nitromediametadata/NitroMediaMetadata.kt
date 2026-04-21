@@ -28,7 +28,7 @@ class NitroMediaMetadata: HybridNitroMediaMetadataSpec() {
           val result = VideoInfoResult(
             duration = meta.duration,
             hasAudio = meta.hasAudio,
-            isHDR = meta.isHDR,
+            isHDR = meta.isHDR?.let { Variant_NullType_Boolean.create(it) },
             width = (meta.width ?: 0).toDouble(),
             height = (meta.height ?: 0).toDouble(),
             fps = (meta.fps ?: 0f).toDouble(),
@@ -43,11 +43,11 @@ class NitroMediaMetadata: HybridNitroMediaMetadataSpec() {
             audioChannels = (meta.audioChannels ?: 0).toDouble(),
             audioCodec = meta.audioCodec ?: "",
             location = meta.location?.let {
-              VideoLocationType(
+              Variant_NullType_VideoLocationType.create(VideoLocationType(
                 latitude = it.latitude,
                 longitude = it.longitude,
                 altitude = it.altitude
-              )
+              ))
             }
           )
 
@@ -135,11 +135,11 @@ class NitroMediaMetadata: HybridNitroMediaMetadataSpec() {
             orientation = meta.orientation,
             exif = meta.exif,
             location = meta.location?.let {
-              VideoLocationType(
+              Variant_NullType_VideoLocationType.create(VideoLocationType(
                 latitude = it.latitude,
                 longitude = it.longitude,
                 altitude = it.altitude
-              )
+              ))
             }
           )
 
